@@ -129,3 +129,10 @@
       1. Here, we generate answers from multiple agents and then feed them to another agent asking it to return the most common answer as result
    5. Persona based prompting
       1. Here, we ask the model to answer by personification someone. You just provide the model with some example of may be chats, video transcript etc related to the person you want the model to personify and then ask it output the result in same way the person would have given it
+
+## Agents / Agentic AI
+
+1. The LLMs are trained at some intervals of time. They always lack some latest and rapidly changing info like current time, weather of a place etc.
+2. Also, LLMs are just models trained on some data and they just give the output on some input based on the training they have done.
+3. LLMs dont have internet access on their own but we can provide them with internet access by using/building some external tools.
+4. The LLMs along with access to external tools in known as an Agent
