@@ -136,3 +136,29 @@
 2. Also, LLMs are just models trained on some data and they just give the output on some input based on the training they have done.
 3. LLMs dont have internet access on their own but we can provide them with internet access by using/building some external tools.
 4. The LLMs along with access to external tools in known as an Agent
+
+## RAG
+
+1. RAG stands for Retrieval Augumented Generation
+2. Suppose you have some company data and you want the LLM to respond to user based on that data. There are 2 possible ways:
+   1. Train the model based on your data
+      1. Training a model is very time and resource consuming process.
+      2. Also if your organization has continously changing data, then the model will always be lagging behind data changes
+   2. Feed the data in context so the model can respond based on that
+      1. This is possible as we feed the data in context so the model can pick necessary info from it and share it with the user.
+      2. But the challenge is that the data can be huge in size, so if we try to send the full data in the context then it will hit the token limit and increase the costing a lot
+      3. To resolve this issue, we use RAGs
+3. In RAG, we first ingest our data into a vector database along with the data they represent. Then, when user query some info, we first fetch the relevant vectors from the vector database along with the data we then we add the data and the user query to the LLM and the LLM answers the user based on the context
+4. In RAG, we have the following 2 phases:
+   1. Ingestion
+      1. Suppose, you have your company data in some format say PDF. The PDF size can be huge.
+      2. Here, we first parse the PDF using some tools available in market. Langchain tools are popular in the market.
+      3. Then, we divide the PDF parsed data into chunks. The chunks can be made per page or they can be made with some charcter limit say 1000 characters
+      4. Then, we create vector embeddings for each chunk. The vector embeddings will also have the chunk text as metadata so that we can fetch the data when we are fetching some chunk
+      5. Then, we store the generated vector embeddings in some vector database.
+   2. Retrieval
+      1. When user queries some data, we first create vector embeddings of the user query.
+      2. Then, we search the vector database and fetch related vector embeddings with the user query vector embeddings
+      3. The fetched vector embeddings will have metadata, containing the actual company data chunks, with them. We then put that metadata from each fetched vector embedding into the SYSTEM_PROMPT and also add the user query along with it.
+      4. The LLM will provide the answer to the user query based on the system prompt containing the company data.
+         ![Rag](./images/02.rag.png)
