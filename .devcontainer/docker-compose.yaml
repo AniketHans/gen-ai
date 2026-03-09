@@ -1,0 +1,18 @@
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+
+    volumes:
+      - ../..:/workspaces:cached
+
+    command: sleep infinity
+
+  redis:
+    image: redis
+
+  vector-db:
+    image: qdrant/qdrant
+    ports:
+      - 6333:6333
