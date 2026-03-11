@@ -162,3 +162,17 @@
       3. The fetched vector embeddings will have metadata, containing the actual company data chunks, with them. We then put that metadata from each fetched vector embedding into the SYSTEM_PROMPT and also add the user query along with it.
       4. The LLM will provide the answer to the user query based on the system prompt containing the company data.
          ![Rag](./images/02.rag.png)
+
+## LangGraph
+
+1. For processing a user query using LLMs, we can have mutiple steps like creating vector embeddings, searching in vector DBs then adding it to context and then asking the LLM. Also, in multi model projects, we can have some conditional statements to decide which model to use and which step to go to. Thus, our code can have mutliple flows
+2. If we use if else to manage these flows then it will make our code complex to understand
+3. Thus, we use Langgraph
+4. LangGraph is a framework built on top of LangChain that lets you build stateful, multi-step AI workflows using a graph structure instead of simple sequential chains. It is mainly used for AI agents and complex LLM workflows where multiple steps, tools, and decision paths are involved.
+5. LangGraph lets you define nodes and edges like a graph.
+   1. Nodes → tasks (LLM calls, tools, functions)
+   2. Edges → how execution flows between tasks
+   3. State → shared memory passed across nodes
+6. We have a state in LangGraph which is passed to Nodes and nodes do some processing and change the state. At the end, we will recieve the final state from which we can get the result  
+   ![Multistep flow](./images/03.langgraph.png)
+7.
