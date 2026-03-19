@@ -175,4 +175,14 @@
    3. State → shared memory passed across nodes
 6. We have a state in LangGraph which is passed to Nodes and nodes do some processing and change the state. At the end, we will recieve the final state from which we can get the result  
    ![Multistep flow](./images/03.langgraph.png)
-7.
+7. Checkpointing in LangGraph
+   1. Checkpointing in LangGraph is a mechanism used to save the state of a workflow (graph execution) at certain points so it can be resumed later instead of starting from the beginning.
+   2. It is especially useful for long-running LLM workflows, agents, or multi-step pipelines.
+   3. LangGraph stores the graph state, which usually includes:
+      - Current nod
+      - State variable
+      - Messages / conversation histor
+      - Intermediate output
+      - Execution metadata
+   4. After each node execution, we are going to save the state in database. This state can be used to resume the node execution if failed at some step or we can resume from the previous chat's final state after beginning of a new execution.
+   5. To differentiate amoung chats, we have to pass unique thread_id to the llm so that chats from different users does not get mixed
