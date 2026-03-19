@@ -102,7 +102,7 @@ while True:
             inputs = jsonOp.get("input")
             print(f"Calling the {func} function")
             tool_map[func](inputs)
-            messages.append({"role": "assistant", "content": json.dumps(response.choices[0].message.content )})
+            messages.append({"role": "assistant", "content": response.choices[0].message.content })
             continue
         
         if jsonOp.get("step") == "RESULT":
